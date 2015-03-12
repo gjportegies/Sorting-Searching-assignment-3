@@ -13,22 +13,17 @@ public class BoyerMoore {
 
     private int[] right;
     private String pat;
+    
     private int matches;
-    private String gedicht;
+    private int comparisons;
+    final private String gedicht;
 
-    BoyerMoore(String pat, String gedicht) {  // Compute skip table.
+    BoyerMoore(String gedicht) {  // Compute skip table.
         matches = 0;
+        comparisons = 0;
+        
         this.gedicht = gedicht;
-        this.pat = pat;
-        int M = pat.length();
-        int R = gedicht.length();
-        right = new int[R];
-        for (int c = 0; c < R; c++) {
-            right[c] = -1;
-        }
-        for (int j = 0; j < M; j++) {
-            right[pat.charAt(j)] = j;
-        }
+        this.right = new int[gedicht.length()];
     }
 
     public int search(int pos) {  // Search for pattern in txt.
@@ -47,15 +42,46 @@ public class BoyerMoore {
                 }
             }
             if (skip == 0) {
+                matches++;
                 return i; // found
             }
-            matches++;
+            comparisons++;
         }
         return N; // not found
     }
 
     public int getMatches() {
         return matches;
+    }
+
+    public int getComparisons() {
+        return comparisons;
+    }
+    
+    public int searchForWord(String word) {
+        this.matches = 0;
+        this.comparisons = 0;
+        this.pat = word;
+        
+        int M = word.length();
+        int R = gedicht.length();
+        
+        for (int c = 0; c < R; c++) {
+            right[c] = -1;
+        }
+        for (int j = 0; j < M; j++) {
+            right[pat.charAt(j)] = j;
+        }
+        
+        int currentPos = 0;
+        for (int i = 0; i < gedicht.length(); i++) {
+            currentPos = search(currentPos + 1);
+            if (currentPos >= gedicht.length()) {
+                return this.matches; // Stop
+            }
+        }
+        
+        return this.matches;
     }
 
 }
