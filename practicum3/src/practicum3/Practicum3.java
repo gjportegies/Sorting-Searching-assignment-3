@@ -21,11 +21,11 @@ public class Practicum3 {
      * @param args the command line arguments
      */
     public static void main(String[] args) throws IOException {
-        String gedicht   = readFile("/Users/koen_karsten/Documents/Hva/S&S/Sorting-Searching-assignment-3/practicum3/src/practicum3/gedicht.txt");
+        String gedicht   = fileToString("/Users/koen_karsten/Documents/Hva/S&S/Sorting-Searching-assignment-3/practicum3/src/practicum3/gedicht.txt");
         BoyerMoore boyerMoore = new BoyerMoore(gedicht);
     }
     
-    static String readFile(String path) throws IOException {
+    static String fileToString(String path) throws IOException {
         byte[] encoded = Files.readAllBytes(Paths.get(path));
         return new String(encoded, StandardCharsets.UTF_8);
     }
