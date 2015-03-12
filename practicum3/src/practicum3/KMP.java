@@ -9,6 +9,6 @@ package practicum3;
  *
  * @author guus_portegies
  */
-public class KnuthMorrisPratt {
+public class KMP {
     
 }
