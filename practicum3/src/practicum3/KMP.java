@@ -13,6 +13,7 @@ public class KMP {
     
     private String pat;
     private int[][] dfa;
+    private int matches;
     
     public KMP(String pat) {
         // Build DFA from pattern.
@@ -34,10 +35,22 @@ public class KMP {
     public int search(String txt) {
         
         int i, j, N = txt.length(), M = pat.length();
-        for (i = 0, j = 0; i < N && j < M; i++)
+        
+        for (i = 0, j = 0; i < N && j < M; i++) {
            j = dfa[txt.charAt(i)][j];
-        if (j == M) return i - M;  // found (hit end of pattern)
-        else        return N;      // not found (hit end of text)
+        }
+        
+        if (j == M) {
+            // found (hit end of pattern)
+            this.matches++;
+            return i - M;
+        } else {
+            // not found (hit end of text)
+            return N;
+        }      
     }
     
+    public int getMatches() {
+        return this.matches;
+    }
 }
