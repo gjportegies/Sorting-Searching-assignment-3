@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package practicum3;
 
 /**
  *
- * @author guus_portegies
+ * @authors guus_portegies && koen_karsten
  */
 public class BoyerMoore {
     final private String haystack;
@@ -23,11 +18,11 @@ public class BoyerMoore {
         right = new int[gedicht.length()];
     }
 
-    private int search(int pos) {  // Search for pattern in txt.
+    private int search(int position) {  // Search for pattern in txt.
         int N = this.haystack.length();
         int M = needle.length();
         int skip;
-        for (int i = pos; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
+        for (int i = position; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
             skip = 0;
             for (int j = M - 1; j >= 0; j--) {
                 if (needle.charAt(j) != this.haystack.charAt(i + j)) {
@@ -62,11 +57,11 @@ public class BoyerMoore {
             right[needle.charAt(j)] = j;
         }
         
-        int currentPos = 0;
+        int position = 0;
         for (int i = 0; i < haystack.length(); i++) {
-            currentPos = search(currentPos + 1);
-            if (currentPos >= haystack.length()) {
-                return this.matches; // Stop
+            position = search(position + 1);
+            if (position >= haystack.length()) {
+                return this.matches;
             }
         }
         

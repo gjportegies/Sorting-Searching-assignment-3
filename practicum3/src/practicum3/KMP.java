@@ -1,56 +1,72 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package practicum3;
 
 /**
  *
- * @author guus_portegies
+ * @authors guus_portegies && koen_karsten
  */
 public class KMP {
-    
-    private String pat;
+
     private int[][] dfa;
     private int matches;
-    
-    public KMP(String pat) {
-        // Build DFA from pattern.
-        this.pat = pat;
-        int M = pat.length();
-        int R = 256;
-        dfa = new int[R][M];
-        dfa[pat.charAt(0)][0] = 1;
-        
-        for (int X = 0, j = 1; j < M; j++) {  // Compute dfa[][j].
-            for (int c = 0; c < R; c++)
-                dfa[c][j] = dfa[c][X];
-            dfa[pat.charAt(j)][j] = j+1;
-            X = dfa[pat.charAt(j)][X];
-           
-        }
+    private int comparisons;
+    final private String haystack;
+    private String needle;
+
+    public KMP(String haystack) {
+        this.haystack = haystack;
     }
-    
-    public int search(String txt) {
-        
-        int i, j, N = txt.length(), M = pat.length();
-        
-        for (i = 0, j = 0; i < N && j < M; i++) {
-           j = dfa[txt.charAt(i)][j];
+
+    public int search(int position) {
+        int i, j, N = haystack.length(), M = needle.length();
+        for (i = position, j = 0; i < N && j < M; i++) {
+            comparisons++;
+            j = dfa[haystack.charAt(i)][j];
         }
-        
         if (j == M) {
-            // found (hit end of pattern)
-            this.matches++;
-            return i - M;
+            return i - M; // found (hit end of pattern)
         } else {
-            // not found (hit end of text)
-            return N;
-        }      
+            return N; // not found (hit end of text)
+        }
     }
-    
+
+    public int searchForWord(String word) {
+        this.matches = 0;
+        this.comparisons = 0;
+        this.needle = word;
+
+        int M = needle.length();
+        int R = haystack.length();
+
+        dfa = new int[R][M];
+        dfa[needle.charAt(0)][0] = 1;
+
+        for (int X = 0, j = 1; j < M; j++) {  // Compute dfa[][j].
+            for (int c = 0; c < R; c++) {
+                dfa[c][j] = dfa[c][X];
+            }
+            dfa[needle.charAt(j)][j] = j + 1;
+            X = dfa[needle.charAt(j)][X];
+
+        }
+
+        int position = 0;
+        for (int i = 0; i < haystack.length(); i++) {
+            position = search(position + 1);
+            if (position >= haystack.length()) {
+                return this.matches;
+            } else {
+                matches++;
+            }
+        }
+
+        return this.matches;
+    }
+
     public int getMatches() {
         return this.matches;
+    }
+
+    public int getComparisons() {
+        return this.comparisons;
     }
 }
