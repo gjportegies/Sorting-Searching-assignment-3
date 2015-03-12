@@ -10,31 +10,28 @@ package practicum3;
  * @author guus_portegies
  */
 public class BoyerMoore {
-
-    private int[] right;
-    private String pat;
+    final private String haystack;
+    final private int[] right;
+    private String needle;
     
-    private int matches;
-    private int comparisons;
-    final private String gedicht;
+    private int matches = 0;
+    private int comparisons = 0;
+    
 
     BoyerMoore(String gedicht) {  // Compute skip table.
-        matches = 0;
-        comparisons = 0;
-        
-        this.gedicht = gedicht;
-        this.right = new int[gedicht.length()];
+        this.haystack = gedicht;
+        right = new int[gedicht.length()];
     }
 
-    public int search(int pos) {  // Search for pattern in txt.
-        int N = this.gedicht.length();
-        int M = pat.length();
+    private int search(int pos) {  // Search for pattern in txt.
+        int N = this.haystack.length();
+        int M = needle.length();
         int skip;
         for (int i = pos; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
             skip = 0;
             for (int j = M - 1; j >= 0; j--) {
-                if (pat.charAt(j) != this.gedicht.charAt(i + j)) {
-                    skip = j - right[this.gedicht.charAt(i + j)];
+                if (needle.charAt(j) != this.haystack.charAt(i + j)) {
+                    skip = j - right[this.haystack.charAt(i + j)];
                     if (skip < 1) {
                         skip = 1;
                     }
@@ -50,38 +47,38 @@ public class BoyerMoore {
         return N; // not found
     }
 
+    public int searchForWord(String word) {
+        this.matches = 0;
+        this.comparisons = 0;
+        this.needle = word;
+        
+        int M = needle.length();
+        int R = haystack.length();
+        
+        for (int c = 0; c < R; c++) {
+            right[c] = -1;
+        }
+        for (int j = 0; j < M; j++) {
+            right[needle.charAt(j)] = j;
+        }
+        
+        int currentPos = 0;
+        for (int i = 0; i < haystack.length(); i++) {
+            currentPos = search(currentPos + 1);
+            if (currentPos >= haystack.length()) {
+                return this.matches; // Stop
+            }
+        }
+        
+        return this.matches;
+    }
+    
     public int getMatches() {
         return matches;
     }
 
     public int getComparisons() {
         return comparisons;
-    }
-    
-    public int searchForWord(String word) {
-        this.matches = 0;
-        this.comparisons = 0;
-        this.pat = word;
-        
-        int M = word.length();
-        int R = gedicht.length();
-        
-        for (int c = 0; c < R; c++) {
-            right[c] = -1;
-        }
-        for (int j = 0; j < M; j++) {
-            right[pat.charAt(j)] = j;
-        }
-        
-        int currentPos = 0;
-        for (int i = 0; i < gedicht.length(); i++) {
-            currentPos = search(currentPos + 1);
-            if (currentPos >= gedicht.length()) {
-                return this.matches; // Stop
-            }
-        }
-        
-        return this.matches;
     }
 
 }
