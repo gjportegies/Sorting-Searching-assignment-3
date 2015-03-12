@@ -13,6 +13,7 @@ public class BoyerMoore {
 
     private int[] right;
     private String pat;
+    private int matches;
 
     BoyerMoore(String pat) {  // Compute skip table.
         this.pat = pat;
@@ -45,8 +46,13 @@ public class BoyerMoore {
             if (skip == 0) {
                 return i; // found
             }
+            matches++;
         }
         return N; // not found
+    }
+
+    public int getMatches() {
+        return matches;
     }
 
 }
