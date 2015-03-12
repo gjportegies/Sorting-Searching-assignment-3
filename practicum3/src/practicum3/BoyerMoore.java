@@ -16,6 +16,7 @@ public class BoyerMoore {
     private int matches;
 
     BoyerMoore(String pat) {  // Compute skip table.
+        matches = 0;
         this.pat = pat;
         int M = pat.length();
         int R = 256;
