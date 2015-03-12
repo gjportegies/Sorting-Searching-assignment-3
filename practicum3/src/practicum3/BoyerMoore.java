@@ -14,12 +14,14 @@ public class BoyerMoore {
     private int[] right;
     private String pat;
     private int matches;
+    private String gedicht;
 
-    BoyerMoore(String pat) {  // Compute skip table.
+    BoyerMoore(String pat, String gedicht) {  // Compute skip table.
         matches = 0;
+        this.gedicht = gedicht;
         this.pat = pat;
         int M = pat.length();
-        int R = 256;
+        int R = gedicht.length();
         right = new int[R];
         for (int c = 0; c < R; c++) {
             right[c] = -1;
@@ -29,15 +31,15 @@ public class BoyerMoore {
         }
     }
 
-    public int search(String txt) {  // Search for pattern in txt.
-        int N = txt.length();
+    public int search(int pos) {  // Search for pattern in txt.
+        int N = this.gedicht.length();
         int M = pat.length();
         int skip;
-        for (int i = 0; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
+        for (int i = pos; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
             skip = 0;
             for (int j = M - 1; j >= 0; j--) {
-                if (pat.charAt(j) != txt.charAt(i + j)) {
-                    skip = j - right[txt.charAt(i + j)];
+                if (pat.charAt(j) != this.gedicht.charAt(i + j)) {
+                    skip = j - right[this.gedicht.charAt(i + j)];
                     if (skip < 1) {
                         skip = 1;
                     }
