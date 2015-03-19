@@ -21,13 +21,28 @@ public class Practicum3 {
         KMP kmp = new KMP(gedicht);
         
         System.out.println("===========BM algorithm===========");
-        System.out.println("de: " + boyerMoore.searchForWord("de"));
-        System.out.println("het: " + boyerMoore.searchForWord("het"));
-        System.out.println("voor: " + boyerMoore.searchForWord("voor"));
+        System.out.println("de:  FOUND:" + boyerMoore.searchForWord("de") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("het:  FOUND:" + boyerMoore.searchForWord("het") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("voor:  FOUND:" + boyerMoore.searchForWord("voor") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("welke:  FOUND:" + boyerMoore.searchForWord("welke") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("mei:  FOUND:" + boyerMoore.searchForWord("mei") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("droefenis:  FOUND:" + boyerMoore.searchForWord("droefenis") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("ziternietin:  FOUND:" + boyerMoore.searchForWord("ziternietin") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("haar:  FOUND:" + boyerMoore.searchForWord("haar") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("zitten:  FOUND:" + boyerMoore.searchForWord("zitten") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("golven:  FOUND:" + boyerMoore.searchForWord("golven") + " COMPARISONS: " + boyerMoore.getComparisons());
         System.out.println("===========KMP algorithm==========");
-        System.out.println("de: " + kmp.searchForWord("de"));
-        System.out.println("het: " + kmp.searchForWord("het"));
-        System.out.println("voor: " + kmp.searchForWord("voor"));
+        System.out.println("de:  FOUND:" + kmp.searchForWord("de") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("het:  FOUND:" + kmp.searchForWord("het") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("voor:  FOUND:" + kmp.searchForWord("voor") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("welke:  FOUND:" + kmp.searchForWord("welke") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("mei:  FOUND:" + kmp.searchForWord("mei") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("droefenis:  FOUND:" + kmp.searchForWord("droefenis") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("ziternietin:  FOUND:" + kmp.searchForWord("ziternietin") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("haar:  FOUND:" + kmp.searchForWord("haar") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("zitten:  FOUND:" + kmp.searchForWord("zitten") + " COMPARISONS: " + kmp.getComparisons());
+        System.out.println("golven:  FOUND:" + kmp.searchForWord("golven") + " COMPARISONS: " + kmp.getComparisons());
+        
     }
     
     
