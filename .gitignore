@@ -7,3 +7,5 @@
 /practicum3/build/*
 /practicum3/dist/*
 /practicum3/output/*
+
+/practicum3/src/.DS_Store
