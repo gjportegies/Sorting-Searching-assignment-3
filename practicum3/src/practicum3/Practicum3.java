@@ -19,9 +19,11 @@ public class Practicum3 {
         // Step 2: load both the algorithms, and pass the testFile into it
         BoyerMoore boyerMoore = new BoyerMoore(gedicht);
         KMP kmp = new KMP(gedicht);
+        RegularExpressions regExp = new RegularExpressions();
         
+        // Step 3: Search for 10 different words with both the 2 algorithms
         System.out.println("===========BM algorithm===========");
-        System.out.println("de:  FOUND:" + boyerMoore.searchForWord("de") + " COMPARISONS: " + boyerMoore.getComparisons());
+        System.out.println("de:  FOUND:" + boyerMoore.searchForWord("de") +" COMPARISONS: " + boyerMoore.getComparisons());
         System.out.println("het:  FOUND:" + boyerMoore.searchForWord("het") + " COMPARISONS: " + boyerMoore.getComparisons());
         System.out.println("voor:  FOUND:" + boyerMoore.searchForWord("voor") + " COMPARISONS: " + boyerMoore.getComparisons());
         System.out.println("welke:  FOUND:" + boyerMoore.searchForWord("welke") + " COMPARISONS: " + boyerMoore.getComparisons());
@@ -44,7 +46,6 @@ public class Practicum3 {
         System.out.println("golven:  FOUND:" + kmp.searchForWord("golven") + " COMPARISONS: " + kmp.getComparisons());
         
     }
-    
     
     // Helper function to convert the .txt to a String
     // Based upon http://stackoverflow.com/questions/326390/how-to-create-a-java-string-from-the-contents-of-a-file#answer-326440

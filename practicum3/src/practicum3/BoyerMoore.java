@@ -13,14 +13,17 @@ public class BoyerMoore {
     private int comparisons = 0;
     
 
-    BoyerMoore(String gedicht) {  // Compute skip table.
-        this.haystack = gedicht;
-        right = new int[gedicht.length()];
+    
+    BoyerMoore(String haystack) {
+        // Set haystack for future usage
+        this.haystack = haystack;
+        // Compute the amount of chars to skip after any mismatch
+        right = new int[haystack.length()];
     }
 
     private int search(int position) {  // Search for pattern in txt.
-        int N = this.haystack.length();
-        int M = needle.length();
+        int N = this.haystack.length(); // Used for detecting haystack end (failure)
+        int M = needle.length(); // Used for detecting end of needle (succes)
         int skip;
         for (int i = position; i <= N - M; i += skip) {  // Does the pattern match the text at position i ?
             skip = 0;
@@ -35,7 +38,7 @@ public class BoyerMoore {
             }
             if (skip == 0) {
                 matches++;
-                return i; // found
+                return i; // found (hit end of pattern)
             }
             comparisons++;
         }
@@ -43,29 +46,27 @@ public class BoyerMoore {
     }
 
     public int searchForWord(String word) {
+        // Step 1: Initialize some default values for future use
         this.matches = 0;
         this.comparisons = 0;
-        this.needle = word;
+        this.needle = word; // The word were looking for
+        int M = needle.length(); // Used for detecting end of needle (succes)
+        int R = haystack.length(); // Used for detecting haystack end (failure)
         
-        int M = needle.length();
-        int R = haystack.length();
+        // Step 2: Initialize and alter the right Array for use in search()  
+        for (int c = 0; c < R; c++) { right[c] = -1; }
+        for (int j = 0; j < M; j++) { right[needle.charAt(j)] = j; }
         
-        for (int c = 0; c < R; c++) {
-            right[c] = -1;
-        }
-        for (int j = 0; j < M; j++) {
-            right[needle.charAt(j)] = j;
-        }
-        
+        // Step 3: Start looking for the substring by looping the haystack
         int position = 0;
         for (int i = 0; i < haystack.length(); i++) {
             position = search(position + 1);
             if (position >= haystack.length()) {
-                return this.matches;
+                return this.getMatches();
             }
         }
         
-        return this.matches;
+        return this.getMatches();
     }
     
     public int getMatches() {
