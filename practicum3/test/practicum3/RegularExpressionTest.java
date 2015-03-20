@@ -52,6 +52,34 @@ public class RegularExpressionTest {
     }
     
     @Test
+    public void testCheckNummer1a() {
+        String telNr = "06341492710";
+        RegularExpression instance = new RegularExpression();
+        boolean expResult = false;
+        boolean result = instance.checkNummer(telNr);
+        System.out.println("Test checkNummer(), Phonenumber: " + telNr +"\t Expected result: " + expResult + "\t\t Result: " + result);
+        assertEquals(expResult, result);
+    }
+    
+    public void testCheckNummer1b() {
+        String telNr = "+31634149271";
+        RegularExpression instance = new RegularExpression();
+        boolean expResult = true;
+        boolean result = instance.checkNummer(telNr);
+        System.out.println("Test checkNummer(), Phonenumber: " + telNr +"\t Expected result: " + expResult + "\t\t Result: " + result);
+        assertEquals(expResult, result);
+    }
+    
+    public void testCheckNummer1c() {
+        String telNr = "00316-34149271";
+        RegularExpression instance = new RegularExpression();
+        boolean expResult = true;
+        boolean result = instance.checkNummer(telNr);
+        System.out.println("Test checkNummer(), Phonenumber: " + telNr +"\t Expected result: " + expResult + "\t\t Result: " + result);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
     public void testCheckNummer2() {
         String telNr = "06-34149271";
         RegularExpression instance = new RegularExpression();
@@ -107,7 +135,7 @@ public class RegularExpressionTest {
     
     @Test
     public void testCheckNummer7() {
-        String telNr = "1234567890";
+        String telNr = "123456789";
         RegularExpression instance = new RegularExpression();
         boolean expResult = false;
         boolean result = instance.checkNummer(telNr);
@@ -165,6 +193,16 @@ public class RegularExpressionTest {
      */
     @Test
     public void testCheckNummer12() {
+        String telNr = "09001234";
+        RegularExpression instance = new RegularExpression();
+        boolean expResult = true;
+        boolean result = instance.checkNummer(telNr);
+        System.out.println("Test checkNummer(), Phonenumber: " + telNr +"\t Expected result: " + expResult + "\t\t Result: " + result);
+        assertEquals(expResult, result);
+    }
+    
+    @Test
+    public void testCheckNummer12a() {
         String telNr = "0900-1234";
         RegularExpression instance = new RegularExpression();
         boolean expResult = true;
