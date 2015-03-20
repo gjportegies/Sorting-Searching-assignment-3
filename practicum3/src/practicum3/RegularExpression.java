@@ -30,7 +30,7 @@ public class RegularExpression {
         // Als nummer met gebiedscode van 3 cijfers zoals 020 / 033
         // EXTRA 2e letter nooit een 0, dus geen: 002
         // EXTRA kan ook met streepje: 020-
-        // ([1-9]{1}\\d{1}[- ]?[0-9](\\d{6}))
+        // (([1-5|7-9])[0-9][-]?[1-9](\\d{6}))
         
         // Als nummer met gebiedscode van 4 cijfers zoals 0228 / 0521
         // EXTRA kan ook met streepje: 0228-
@@ -43,7 +43,7 @@ public class RegularExpression {
         String regex = ""
             + "^(((\\+31)|(0031)|(0))"                          // Alle nummers beginnen met 031 of +31 of 0031 of 0.
             + "(((6)[-]?[1-9](\\d{7}))$"                        // Als mobiel nummer dus begint met 06
-            + "|([1-9]{2}[-]?[1-9](\\d{6}))$"                   // Als nummer met gebiedscode van 3 cijfers zoals 020 / 033
+            + "|(([1-5|7-9])[0-9][-]?[1-9](\\d{6}))$"           // Als nummer met gebiedscode van 3 cijfers zoals 020 / 033
             + "|([1-9]{2}\\d{1}[-]?[1-9](\\d{5}))$)"            // Als nummer met gebiedscode van 4 cijfers zoals 0228 / 0521
             + "|((0)((800)|(90)[0,6,9])[-]?(\\d{4}))|(112))";   // Uitzonderingen korte servicenummers zoals 112 / 0900 / 0800
         
